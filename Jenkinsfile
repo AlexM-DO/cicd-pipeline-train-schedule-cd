@@ -1,4 +1,7 @@
 pipeline {
+   tools {
+        jdk 'java9'
+    }
     agent any
     stages {
         stage('Build') {
