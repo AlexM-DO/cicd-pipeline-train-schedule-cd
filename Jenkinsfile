@@ -11,8 +11,10 @@ pipeline {
                 archiveArtifacts artifacts: 'dist/trainSchedule.zip'
             }
         }
-       
-      steps {
+       stage ('deploy to satge'){
+          when {branch 'master'
+          }
+          steps {
                 withCredentials([usernameKey(credentialsId: 'webserver_login', usernameVariable: 'USERNAME', passwordVariable: 'USERKEY')]) {
                     sshPublisher(
                         failOnError: true,
@@ -36,5 +38,6 @@ pipeline {
                         ]
                     )
                 }
+     }
             }
         }
